@@ -65,18 +65,18 @@
     </div>
     <script>
         const questions = [
-            { text: "Should the government provide a universal public healthcare option?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should the government provide a universal public healthcare option?", values: [2, 1, 0, -1, -2] },
             { text: "Should the government guarantee the right to abortion?", values: [2, 1, 0, -1, -2] },
-            { text: "Should private gun ownership have more restrictions?", values: [-2, -1, 0, 1, 2] },
-            { text: "Should tax rates be increased on the wealthy?", values: [-2, -1, 0, 1, 2] },
-            { text: "Should environmental regulations be expanded even at the cost of businesses?", values: [-2, -1, 0, 1, 2] },
-            { text: "Should immigration be more restricted to protect national security?", values: [2, 1, 0, -1, -2] },
-            { text: "Should capital punishment remain an option for severe crimes?", values: [2, 1, 0, -1, -2] },
-            { text: "Should LGBTQ+ rights be further expanded and protected?", values: [-2, -1, 0, 1, 2] },
-            { text: "Should government intervention in the economy be increased?", values: [-2, -1, 0, 1, 2] },
-            { text: "Should personal freedoms take precedence over national security?", values: [-2, -1, 0, 1, 2] }
+            { text: "Should private gun ownership have more restrictions?", values: [2, 1, 0, -1, -2] },
+            { text: "Should tax rates be increased on the wealthy?", values: [2, 1, 0, -1, -2] },
+            { text: "Should environmental regulations be expanded even at the cost of businesses?", values: [2, 1, 0, -1, -2] },
+            { text: "Should immigration be more restricted to protect national security?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should capital punishment remain an option for severe crimes?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should LGBTQ+ rights be further expanded and protected?", values: [2, 1, 0, -1, -2] },
+            { text: "Should government intervention in the economy be increased?", values: [2, 1, 0, -1, -2] },
+            { text: "Should personal freedoms take precedence over national security?", values: [2, 1, 0, -1, -2] }
         ];
-        
+
         let currentQuestion = 0;
         let score = 0;
 
@@ -88,7 +88,7 @@
             document.getElementById("question").innerText = questions[currentQuestion].text;
             const optionsDiv = document.getElementById("options");
             optionsDiv.innerHTML = "";
-            ["Strongly Oppose", "Oppose", "Indifferent", "Support", "Strongly Support"].forEach((option, index) => {
+            ["Strongly Support", "Support", "Indifferent", "Oppose", "Strongly Oppose"].forEach((option, index) => {
                 const button = document.createElement("button");
                 button.innerText = option;
                 button.onclick = () => {
