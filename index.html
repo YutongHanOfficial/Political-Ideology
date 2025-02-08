@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Ideology Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00bbff, #ff6666);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            margin-top: 50px;
+        }
+        .question {
+            font-size: 1.8em;
+            margin: 20px 0;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            background: linear-gradient(to right, #00bbff, #ff6666);
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .options button:hover {
+            background: linear-gradient(to right, #0099dd, #ff4444);
+            transform: scale(1.05);
+        }
+        #results {
+            font-size: 2em;
+            margin-top: 20px;
+            display: none;
+            padding: 20px;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Political Ideology Quiz</h1>
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="results"></div>
+    </div>
+    <script>
+        const questions = [
+            { text: "Should the government provide a universal public healthcare option?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should abortion laws be more or less restrictive?", values: [2, 1, 0, -1, -2] },
+            { text: "Should private gun ownership have more restrictions?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should tax rates be increased on the wealthy?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should environmental regulations be expanded even at the cost of businesses?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should immigration be more restricted to protect national security?", values: [2, 1, 0, -1, -2] },
+            { text: "Should capital punishment remain an option for severe crimes?", values: [2, 1, 0, -1, -2] },
+            { text: "Should LGBTQ+ rights be further expanded and protected?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should government intervention in the economy be increased?", values: [-2, -1, 0, 1, 2] },
+            { text: "Should personal freedoms take precedence over national security?", values: [-2, -1, 0, 1, 2] }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                showResults();
+                return;
+            }
+            document.getElementById("question").innerText = questions[currentQuestion].text;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            ["Strongly Oppose", "Oppose", "Indifferent", "Support", "Strongly Support"].forEach((option, index) => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.onclick = () => {
+                    score += questions[currentQuestion].values[index];
+                    currentQuestion++;
+                    loadQuestion();
+                };
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function showResults() {
+            document.getElementById("quiz").style.display = "none";
+            const resultDiv = document.getElementById("results");
+            let ideology = score > 10 ? "Strongly Liberal" : score > 5 ? "Liberal" : score > 0 ? "Leaning Liberal" : score === 0 ? "Centrist" : score > -5 ? "Leaning Conservative" : score > -10 ? "Conservative" : "Strongly Conservative";
+            resultDiv.innerHTML = `<strong>Your ideology:</strong> <span style="color: yellow;">${ideology}</span><br><br>` +
+                                  `<strong>Score:</strong> <span style="color: cyan;">${score}</span>`;
+            resultDiv.style.display = "block";
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
